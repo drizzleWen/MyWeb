@@ -1,11 +1,17 @@
-const express = require('express');
+const koa = require("koa");
+const views = require("koa-views");
+const koaRouter = require("koa-router");
 
-var server = express();
+var app = new koa();
+var router = new koaRouter();
 
 
-server.use('/', (req, res) => {
-    res.send('OK');
-    res.end();
+app.use(async(ctx, next) => {
+    await next();
 });
 
-server.listen(8080);
+router.get("/", require())
+
+app.use(router.routes());
+
+app.listen(8080);
